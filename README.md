@@ -5,7 +5,7 @@ This project allows users to view movie shows, select seats dynamically, and boo
 
 ---
 
-** Features**
+**Features**
 
 * User Signup and Login
 * View available movies and shows
@@ -27,7 +27,7 @@ This project allows users to view movie shows, select seats dynamically, and boo
 
 ---
 
-** Installation & Setup**
+**Installation & Setup**
 
 1. **Clone the repository**
 
