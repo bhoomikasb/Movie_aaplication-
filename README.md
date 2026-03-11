@@ -66,7 +66,7 @@ http://127.0.0.1:8000/
 ```
 
 ---
-** Application Workflow**
+**Application Workflow**
 
 1. User signs up or logs in
 2. User views available movie shows
