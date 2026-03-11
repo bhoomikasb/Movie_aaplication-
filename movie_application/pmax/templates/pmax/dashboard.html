@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movies</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+/* Background */
+
+body{
+background: radial-gradient(circle at top,#1a0000,#000000);
+color:white;
+padding:40px;
+}
+
+/* Title */
+
+h1{
+color:#ff2e2e;
+letter-spacing:2px;
+margin-bottom:30px;
+}
+
+/* Container */
+
+.container{
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:40px;
+}
+
+/* Glass Movie Cards */
+
+.cards{
+
+width:230px;
+padding:20px;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(12px);
+
+border-radius:15px;
+border:1px solid rgba(255,0,0,0.2);
+
+transition:0.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* Hover Effect */
+
+.cards:hover{
+
+transform: translateY(-10px) scale(1.03);
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.9),
+0 0 15px rgba(255,0,0,0.6);
+
+}
+
+/* Image */
+
+.cards img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+/* Text */
+
+.cards h2{
+font-size:16px;
+margin:5px 0;
+text-align:center;
+}
+
+/* Button */
+
+button{
+
+background:#ff2e2e;
+color:white;
+
+border:none;
+border-radius:20px;
+
+padding:8px 18px;
+margin-top:10px;
+
+font-weight:bold;
+cursor:pointer;
+
+transition:0.3s;
+}
+
+/* Button hover */
+
+button:hover{
+
+box-shadow:
+0 0 10px #ff2e2e,
+0 0 20px #ff2e2e;
+
+transform:scale(1.05);
+
+}
+
+/* Logout Button */
+
+.logout{
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<center><h2><i class="fa-solid fa-clapperboard"></i>  Latest Movies</h2><br> <br></center>
+
+<div class="container">
+
+{% for i in movies %}
+
+<div class="cards">
+
+<img src="{{i.image.url}}" alt="">
+
+<h2>Title: {{i.name}}</h2>
+
+<h2>Duration: {{i.duration}} mins</h2>
+
+<a href="{% url 'movie_detail' i.id %}">
+<button>View</button>
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<center class="logout">
+<a href="{% url 'logout'%}">
+<button>Logout</button>
+</a>
+</center>
+
+</body>
+</html>

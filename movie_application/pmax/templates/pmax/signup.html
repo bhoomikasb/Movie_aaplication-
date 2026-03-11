@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI", sans-serif;
+}
+
+/* Background */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle at top,#1a0000,#000000);
+color:white;
+}
+
+/* Glass Form */
+
+form{
+
+width:320px;
+padding:40px;
+
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(15px);
+
+border:1px solid rgba(255,0,0,0.2);
+border-radius:15px;
+
+box-shadow:0 0 20px rgba(0,0,0,0.7);
+
+text-align:center;
+}
+
+/* Title */
+
+form h2{
+margin-bottom:25px;
+color:#ff2e2e;
+letter-spacing:2px;
+}
+
+/* Inputs */
+
+input{
+
+width:100%;
+padding:10px;
+margin-bottom:15px;
+
+border:none;
+outline:none;
+
+border-radius:8px;
+
+background: rgba(255,255,255,0.08);
+color:white;
+
+border:1px solid rgba(255,0,0,0.2);
+}
+
+/* Placeholder */
+
+input::placeholder{
+color:#ccc;
+}
+
+/* Input focus glow */
+
+input:focus{
+border:1px solid #ff2e2e;
+box-shadow:0 0 8px #ff2e2e;
+}
+
+/* Button */
+
+button{
+
+width:100%;
+padding:10px;
+
+border:none;
+border-radius:20px;
+
+background:#ff2e2e;
+color:white;
+
+font-weight:bold;
+cursor:pointer;
+
+transition:0.3s;
+}
+
+/* Button hover */
+
+button:hover{
+
+box-shadow:
+0 0 10px #ff2e2e,
+0 0 20px #ff2e2e;
+
+transform:scale(1.05);
+
+}
+
+/* Error message */
+
+.error{
+margin-top:10px;
+color:#ff4d4d;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<form action="" method="post">
+
+<h2>Signup</h2>
+
+{% csrf_token %}
+
+<input type="text" placeholder="Enter username" required name="username">
+
+<input type="text" placeholder="Enter email" required name="email">
+
+<input type="password" placeholder="Enter password" required name="password">
+
+<button>Signup</button>
+
+{% if error %}
+<p class="error">{{error}}</p>
+{% endif %}
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Movie</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#0f0f0f,#1a0000,#000000);
+    margin:0;
+    padding:0;
+    color:white;
+}
+
+/* GLASS CONTAINER */
+
+.container{
+    width:70%;
+    margin:auto;
+    margin-top:50px;
+    padding:35px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:0 0 30px rgba(255,0,0,0.2);
+}
+
+/* HEADINGS */
+
+h1{
+    text-align:center;
+    color:#ff2e63;
+}
+
+/* MOVIE SECTION */
+
+.movie{
+    text-align:center;
+}
+
+.movie img{
+    border-radius:12px;
+    margin:15px 0;
+    box-shadow:0 0 20px rgba(255,0,0,0.4);
+}
+
+/* SHOW CARDS */
+
+.show-card{
+    padding:18px;
+    margin:20px 0;
+
+    border-radius:10px;
+
+    background: rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+}
+
+/* BUTTONS */
+
+button{
+    padding:10px 22px;
+    border:none;
+    border-radius:6px;
+
+    background:#ff2e63;
+    color:white;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff003c;
+    transform:scale(1.05);
+}
+
+/* SOLD OUT BUTTON */
+
+.soldout{
+    background:#555;
+}
+
+/* REVIEWS */
+
+.review{
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding:12px 0;
+}
+
+/* FORM */
+
+textarea{
+    width:100%;
+    padding:12px;
+
+    border-radius:8px;
+    border:none;
+
+    background: rgba(255,255,255,0.08);
+    color:white;
+}
+
+select{
+    padding:10px;
+    border-radius:6px;
+    border:none;
+
+    background: rgba(255,255,255,0.08);
+    color:white;
+}
+
+/* DASHBOARD LINK */
+
+.dashboard{
+    text-decoration:none;
+    color:#ff2e63;
+    font-weight:bold;
+}
+
+.dashboard:hover{
+    color:#ff003c;
+}
+
+hr{
+    border:1px solid rgba(255,255,255,0.1);
+}
+select{
+    background-color: black;
+    color: white;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a class="dashboard" href="{% url 'dashboard' %}">⬅ Back to Dashboard</a>
+
+<h1>Book Now</h1>
+
+<div class="movie">
+<h2>{{movie.name}}</h2>
+
+<img height="250px" src="{{movie.image.url}}" alt="">
+
+<h3>Language: {{movie.language}}</h3>
+<h3>Duration: {{movie.duration}} mins</h3>
+</div>
+
+<hr>
+
+<h2>Available Shows</h2>
+
+{% for i in shows %}
+
+<div class="show-card">
+
+<p><b>Theatre:</b> {{i.theatre}}</p>
+<p><b>Show Time:</b> {{i.show_time}}</p>
+<p><b>Price:</b> ₹{{i.price}}</p>
+<p><b>Available Seats:</b> {{i.available_seats}}</p>
+
+{% if i.available_seats > 0 %}
+<a href="{% url 'book_show' i.id %}"><button>Book Now</button></a>
+{% else %}
+<button class="soldout">Sold Out</button>
+{% endif %}
+
+</div>
+
+{% empty %}
+
+<h3>No shows available</h3>
+
+{% endfor %}
+
+<hr>
+
+<h2>User Reviews</h2>
+
+{% for i in reviews %}
+
+<div class="review">
+<p><b>{{i.user.username}}</b> ⭐ {{i.rating}}</p>
+<p>{{i.comment}}</p>
+</div>
+
+{% empty %}
+
+<p>No reviews available</p>
+
+{% endfor %}
+
+<hr>
+
+<h2>Write Your Review</h2>
+
+<form method="post">
+
+{% csrf_token %}
+
+<textarea name="comment" placeholder="Write your review..." required></textarea>
+
+<br><br>
+
+<select name="rating" required>
+<option value="">Select Rating</option>
+<option value="5">5 - Excellent</option>
+<option value="4">4 - Good</option>
+<option value="3">3 - Average</option>
+<option value="2">2 - Bad</option>
+<option value="1">1 - Worst</option>
+</select>
+</div>
+
+<br><br>
+
+<center><button id="btn">Post Review</button></center>
+</form>
+
+</div>
+
+</body>
+</html>

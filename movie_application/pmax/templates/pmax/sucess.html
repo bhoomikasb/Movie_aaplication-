@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Details</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI", sans-serif;
+}
+
+/* Background */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle at top,#1a0000,#000000);
+color:white;
+}
+
+/* Glass container */
+
+.container{
+
+width:350px;
+padding:40px;
+
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(15px);
+
+border:1px solid rgba(255,0,0,0.2);
+border-radius:15px;
+
+box-shadow:0 0 20px rgba(0,0,0,0.7);
+
+text-align:center;
+}
+
+/* Title */
+
+.container h1{
+margin-bottom:20px;
+color:#ff2e2e;
+}
+
+/* Details */
+
+.details{
+margin-bottom:25px;
+font-size:18px;
+}
+
+/* Button */
+
+button{
+
+padding:10px 25px;
+
+border:none;
+border-radius:20px;
+
+background:#ff2e2e;
+color:white;
+
+font-weight:bold;
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+/* Hover */
+
+button:hover{
+
+box-shadow:
+0 0 10px #ff2e2e,
+0 0 20px #ff2e2e;
+
+transform:scale(1.05);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Booking Details</h1>
+
+<div class="details">
+<p><b>Show Name:</b> {{show.movie}}</p>
+<p><b>No of Seats Booked:</b> {{seats}}</p>
+<p><b>Total Payable:</b> ₹{{total_price}}</p>
+</div>
+
+<a href="{% url 'dashboard' %}">
+<button>Return to Main Page</button>
+</a>
+
+</div>
+
+</body>
+</html>

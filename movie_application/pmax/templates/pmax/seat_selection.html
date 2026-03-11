@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seat Booking</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI", sans-serif;
+}
+
+/* Background */
+
+body{
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background: radial-gradient(circle at top,#1a0000,#000000);
+color:white;
+}
+
+/* Glass container */
+
+.container{
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(15px);
+border:1px solid rgba(255,0,0,0.2);
+border-radius:15px;
+padding:40px;
+box-shadow:0 0 20px rgba(0,0,0,0.7);
+text-align:center;
+}
+
+/* Titles */
+
+h2{
+margin-bottom:10px;
+color:#ff2e2e;
+}
+
+/* Seat area */
+
+.seat_area{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:25px;
+}
+
+/* Seat style */
+
+.seat_area div{
+display:flex;
+align-items:center;
+justify-content:center;
+
+width:60px;
+height:40px;
+
+background: rgba(255,255,255,0.08);
+border:1px solid rgba(255,0,0,0.2);
+
+border-radius:10px;
+cursor:pointer;
+
+transition:0.3s;
+}
+
+/* Seat hover */
+
+.seat_area div:hover{
+box-shadow:0 0 8px #ff2e2e;
+transform:scale(1.05);
+}
+
+/* Selected seats */
+
+.seat_area div.selected{
+background:green;
+color:white;
+box-shadow:0 0 10px green;
+}
+
+/* Booked seats */
+
+.seat_area div.booked{
+background:red;
+color:white;
+cursor:not-allowed;
+box-shadow:0 0 8px red;
+}
+
+/* Button */
+
+button{
+margin-top:25px;
+padding:10px 25px;
+
+border:none;
+border-radius:20px;
+
+background:#ff2e2e;
+color:white;
+
+font-weight:bold;
+cursor:pointer;
+
+transition:0.3s;
+}
+
+/* Button hover */
+
+button:hover{
+box-shadow:
+0 0 10px #ff2e2e,
+0 0 20px #ff2e2e;
+
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>{{show.movie.name}} - {{show.theatre.name}}</h2>
+<h2>Show Time: {{show.show_time}}</h2>
+<h2>Available seats: {{show.available_seats}}</h2>
+<h2>Price: {{show.price}}</h2>
+
+<form action="" method="post">
+
+{% csrf_token %}
+
+<div class="seat_area">
+
+{% for seat in seats %}
+<div id="{{seat}}" 
+class="{% if seat in booked_seats %}booked{% endif %}" 
+onclick="selectSeat('{{seat}}')">
+
+{{seat}}
+
+</div>
+{% endfor %}
+
+</div>
+
+<input type="hidden" name="selected_seats" id="selectedSeats">
+
+<br><br>
+
+<button>Confirm Booking</button>
+
+</form>
+
+</div>
+
+<script>
+
+let selected=[]
+
+function selectSeat(id){
+
+let seat=document.getElementById(id)
+
+if(seat.classList.contains("booked")) return
+
+seat.classList.toggle("selected")
+
+if(seat.classList.contains("selected")){
+selected.push(id)
+}
+else{
+selected=selected.filter(s=>s!=id)
+}
+
+document.getElementById("selectedSeats").value=selected.join(",")
+
+}
+
+</script>
+
+</body>
+</html>
